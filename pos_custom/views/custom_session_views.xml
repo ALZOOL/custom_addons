@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_custom_session_form" model="ir.ui.view">
+        <field name="name">custom.session.form.inherit</field>
+        <field name="model">custom_session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <header>
+                <button name="generate_pdf_report" type="object" string="Print Report" class="oe_highlight"/>
+                <button name="action_pos_order_invoice" string="Invoice" type="object" attrs="{'invisible': [('state','!=','paid')]}"/>
+            </header>
+        </field>
+    </record>
+    <record id="action_custom_session_views" model="ir.actions.act_window">
+        <field name="name">Custom Session</field>
+        <field name="res_model">custom_session</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="custom_session_main_menu"
+              name="Custom Session"
+              sequence="2"
+              parent="postest_root_menu" />
+    <menuitem id="all_custom_session_menu"
+              name="All Custom Session"
+              sequence="1"
+              parent="custom_session_main_menu"
+              action="action_custom_session_views" />
+</odoo>

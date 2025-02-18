@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id ="view_postest_form" model="ir.ui.view">
+        <field name="name">postest.view.form</field>
+        <field name="model">postest</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="customer_id"/>
+                        <field name="price"/>
+                        <field name="currency_id"/>
+                        <field name="company_id"/>
+                    </group>
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+    <record id ="view_postest_tree" model="ir.ui.view">
+        <field name="name">postest.view.tree</field>
+        <field name="model">postest</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="customer_id"/>
+                <field name="price"/>
+                <field name="currency_id"/>
+                <field name="company_id"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record id="actions_postest_views" model="ir.actions.act_window">
+        <field name="name">Postest Management</field>
+        <field name="res_model">postest</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="postest_change_state_server_action" model="ir.actions.server">
+        <field name="name">Change State</field>
+        <field name="model_id" ref="model_postest"/>
+        <field name="binding_model_id" ref="model_postest"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_open_change_state_wizard()
+        </field>
+    </record>
+
+    <menuitem id="postest_root_menu"
+              name="Postest"
+              sequence="1" />
+    <menuitem id="postest_main_menu"
+              name="postest"
+              sequence="1"
+              parent="postest_root_menu" />
+    <menuitem id="all_postest_menu"
+              name="All Customers"
+              sequence="1"
+              parent="postest_main_menu"
+              action="actions_postest_views" />
+</odoo>

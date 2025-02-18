@@ -1,0 +1,53 @@
+<odoo>
+    <record id="lawyer_report" model="ir.actions.report">
+        <field name="name">Lawyers Report</field>
+        <field name="model">lawyers</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_lawyers"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">law_order.lawyer_report_template</field>
+    </record>
+
+    <template id="lawyer_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="rec">
+                    <h1>Lawyer Report</h1>
+                    <style>
+                        table {
+                        width:100%;
+                        border:1px solid #b3adad;
+                        border-collapso:collapso;
+                        padding:5px;
+                        }
+                        table th {
+                        border:1px solid #b3adad;
+                        padding:5px;
+                        background: #f0f0f0
+                        color: #313030;
+                        }
+                        table td {
+                        border:1px solid #b3adad;
+                        text-align:center;
+                        padding:5px
+                        background: #fffffff;
+                        color: #313030;
+                        }
+                    </style>
+                    <table>
+                        <thead>
+                            <th colspan="4">General Information</th>
+                            <tbody>
+                                <td>Lawyer</td>
+                                <td><t t-esc="rec.lawyer_id.name"/></td>
+                                <td>Customer</td>
+                                <td><t t-esc="rec.company_id.name"/></td>
+                            </tbody>
+                        </thead>
+                    </table>
+                    <br/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id ="view_lawyers_form" model="ir.ui.view">
+        <field name="name">lawyers.view.form</field>
+        <field name="model">lawyers</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="lawyer_id"/>
+                        <field name="price"/>
+                        <field name="currency_id"/>
+                        <field name="company_id"/>
+                    </group>
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+    <record id ="view_lawyers_tree" model="ir.ui.view">
+        <field name="name">lawyers.view.tree</field>
+        <field name="model">lawyers</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lawyer_id"/>
+                <field name="price"/>
+                <field name="currency_id"/>
+                <field name="company_id"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record id="actions_lawyers_views" model="ir.actions.act_window">
+        <field name="name">Lawyers Management</field>
+        <field name="res_model">lawyers</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="lawyers_change_state_server_action" model="ir.actions.server">
+        <field name="name">Change State</field>
+        <field name="model_id" ref="model_lawyers"/>
+        <field name="binding_model_id" ref="model_lawyers"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_open_change_state_wizard()
+        </field>
+    </record>
+
+    <menuitem id="law_root_menu"
+              name="Law And Orders"
+              sequence="1" />
+    <menuitem id="lawyers_main_menu"
+              name="Lawyers"
+              sequence="1"
+              parent="law_root_menu" />
+    <menuitem id="all_lawyers_menu"
+              name="All Lawyers"
+              sequence="1"
+              parent="lawyers_main_menu"
+              action="actions_lawyers_views" />
+</odoo>
