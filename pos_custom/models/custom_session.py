@@ -1,9 +1,7 @@
 from odoo import models, fields, api
 
 class POSCustomSession(models.Model):
-    _name = 'custom_session'
     _inherit = 'pos.session'
-    _description = 'Custom Point Of Sales Session'
 
     #has_refundable_lines = fields.Boolean(string="Has Refundable Lines", compute='_compute_has_refundable_lines')
     #def _compute_has_refundable_lines(self):
