@@ -10,6 +10,6 @@
         'views/test_partners_views.xml',
     ],
     'installable': True,
-    'auto_install': True,
+    'auto_install': False,
     'license': 'LGPL-3',
 }
