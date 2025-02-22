@@ -1,19 +1,22 @@
 <odoo>
-    <record id="report_point_of_sale" model="ir.actions.report">
-        <field name="name">POS Report</field>
-        <field name="model">custom_session</field>
+    <record id="report_custom_session" model="ir.actions.report">
+        <field name="name">Custom Session Report</field>
+        <field name="model">pos.session</field>
         <field name="report_type">qweb-pdf</field>
         <field name="binding_model_id" ref="point_of_sale.model_pos_session"/>
         <field name="binding_type">report</field>
-        <field name="report_name">pos_custom.report_pos_session_template</field>
+        <field name="report_name">pos_custom.custom_session_report_template</field>
     </record>
 
-    <template id="report_pos_session_template">
+    <template id="custom_session_report_template">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="session">
-                    <h1>POS Report</h1>
                     <style>
+                        .product-table td {
+                            /* Adding vertical space */
+                            height: 50px; /* Adjust height as needed */
+                        }
                         table {
                             width: 100%;
                             border: 1px solid #b3adad;
@@ -34,8 +37,9 @@
                             color: #313030;
                         }
                     </style>
+                    <h4>Products: </h4>
                     <!-- Table 1 -->
-                    <table>
+                    <table class="product-table">
                         <thead>
                             <tr>
                                 <th>Order</th>
@@ -48,16 +52,22 @@
                         </thead>
                         <tbody>
                             <tr t-foreach="session.order_ids" t-as="order">
-                                <td t-esc="order.name"/>
-                                <td t-esc="order.product_id.categ_id.name"/>
-                                <td t-esc="order.product_id.name"/>
-                                <td t-esc="order.product_id.default_code"/>
-                                <td t-esc="order.product_uom_qty"/>
-                                <td t-esc="order.price_unit"/>
+                                <t t-foreach="order.lines" t-as="line">
+                                    <tr>
+                                        <td t-esc="order.name"/>
+                                        <td t-esc="line.full_product_name"/>
+                                        <td t-esc="line.full_product_name"/>
+                                        <td></td>
+                                        <td t-esc="line.qty"/>
+                                        <td t-esc="line.price_unit"/>
+                                    </tr>
+                                </t>
+                                <br/>
                             </tr>
                         </tbody>
                     </table>
-                    <br/>
+                    <br/><br/><br/>
+                    <h4>Payment Methods: </h4>
                     <!-- Table 2 -->
                     <table>
                         <thead>
@@ -67,12 +77,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr t-foreach="session.payment_ids" t-as="payment">
-                                <td t-esc="payment.payment_method_id.name"/>
-                                <td t-esc="payment.amount"/>
+                            <tr t-foreach="session.order_ids" t-as="order">
+                                <tr t-foreach="order.payment_ids" t-as="payment">
+                                    <td t-esc="payment.payment_method_id.name"/>
+                                    <td t-esc="payment.amount"/>
+                                </tr>
                             </tr>
                         </tbody>
                     </table>
+                    <br/>
+                    <h5>Total Payments Amount: <span class="total-amount" t-esc="session.total_payments_amount"/></h5>
                 </t>
             </t>
         </t>

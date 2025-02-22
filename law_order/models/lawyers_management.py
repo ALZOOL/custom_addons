@@ -1,5 +1,5 @@
 from odoo import models, fields
-from odoo.exceptions import ValidationError
+
 
 class lawyersManagement(models.Model):
     _name = 'lawyers'

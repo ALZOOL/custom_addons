@@ -8,6 +8,7 @@
     'depends': ['base','point_of_sale'],
     'data': [
         'views/custom_session_views.xml',
+        'reports/custom_session_report.xml',
     ],
     'installable': True,
     'auto_install': False,
