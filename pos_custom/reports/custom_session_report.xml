@@ -10,84 +10,97 @@
 
     <template id="custom_session_report_template">
         <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-                <t t-foreach="docs" t-as="session">
-                    <style>
-                        .product-table td {
-                            /* Adding vertical space */
-                            height: 50px; /* Adjust height as needed */
-                        }
-                        table {
-                            width: 100%;
-                            border: 1px solid #b3adad;
-                            border-collapse: collapse;
-                            padding: 5px;
-                        }
-                        table th {
-                            border: 1px solid #b3adad;
-                            padding: 5px;
-                            background: #f0f0f0;
-                            color: #313030;
-                        }
-                        table td {
-                            border: 1px solid #b3adad;
-                            text-align: center;
-                            padding: 5px;
-                            background: #ffffff;
-                            color: #313030;
-                        }
-                    </style>
-                    <h4>Products: </h4>
-                    <!-- Table 1 -->
-                    <table class="product-table">
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Product Category</th>
-                                <th>Product</th>
-                                <th>Code</th>
-                                <th>Quantity</th>
-                                <th>Price Unit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr t-foreach="session.order_ids" t-as="order">
-                                <t t-foreach="order.lines" t-as="line">
+            <t t-foreach="docs" t-as="session">
+                <style>
+                    h4 {
+                        font-size: 30px; /* Adjust the font size for h4 */
+                    }
+                    h5 {
+                        font-size: 20px; /* Adjust the font size for h5 */
+                    }
+                    .product-table td {
+                    /* Adding vertical space */
+                    height: 50px; /* Adjust height as needed */
+                    }
+                    table {
+                    width: 100%;
+                    border: 1px solid #b3adad;
+                    border-collapse: collapse;
+                    padding: 5px;
+                    }
+                    table th {
+                    border: 1px solid #b3adad;
+                    padding: 5px;
+                    background: #f0f0f0;
+                    color: #313030;
+                    }
+                    table td {
+                    border: 1px solid #b3adad;
+                    text-align: center;
+                    padding: 5px;
+                    background: #ffffff;
+                    color: #313030;
+                    }
+                </style>
+                <h4>POS Session :
+                    <span class="session-id" t-esc="session.name"/>
+                </h4>
+                <h4>Products:</h4>
+                <!-- Table 1 -->
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Product Category</th>
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Quantity</th>
+                            <th>Price Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="session.order_ids" t-as="order">
+                            <t t-foreach="order.lines" t-as="line">
+                                <tr t-foreach="session.picking_ids" t-as="pick">
                                     <tr>
                                         <td t-esc="order.name"/>
-                                        <td t-esc="line.full_product_name"/>
+                                        <td t-esc="pick.product_id.pos_categ_id.name"/>
                                         <td t-esc="line.full_product_name"/>
                                         <td></td>
                                         <td t-esc="line.qty"/>
                                         <td t-esc="line.price_unit"/>
                                     </tr>
-                                </t>
-                                <br/>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br/><br/><br/>
-                    <h4>Payment Methods: </h4>
-                    <!-- Table 2 -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Payment Method</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr t-foreach="session.order_ids" t-as="order">
-                                <tr t-foreach="order.payment_ids" t-as="payment">
-                                    <td t-esc="payment.payment_method_id.name"/>
-                                    <td t-esc="payment.amount"/>
                                 </tr>
+                            </t>
+                            <br/>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <h4>Payment Methods:</h4>
+                <!-- Table 2 -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Payment Method</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="session.order_ids" t-as="order">
+                            <tr t-foreach="order.payment_ids" t-as="payment">
+                                <td t-esc="payment.payment_method_id.name"/>
+                                <td t-esc="payment.amount"/>
                             </tr>
-                        </tbody>
-                    </table>
-                    <br/>
-                    <h5>Total Payments Amount: <span class="total-amount" t-esc="session.total_payments_amount"/></h5>
-                </t>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <h5>Total Payments Amount:
+                    <span class="total-amount" t-esc="session.total_payments_amount"/>
+                </h5>
             </t>
         </t>
     </template>
