@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_pos_product_combo_form" model="ir.ui.view">
+        <field name="name">pos.product.combo.form</field>
+        <field name="model">pos.product.combo</field>
+        <field name="arch" type="xml">
+            <form string="Combo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pos_product_combo_tree" model="ir.ui.view">
+        <field name="name">pos.product.combo.tree</field>
+        <field name="model">pos.product.combo</field>
+        <field name="arch" type="xml">
+            <tree string="Combo">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
