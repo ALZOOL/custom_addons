@@ -1,42 +1,33 @@
 <odoo>
     <record id="view_product_combo_form" model="ir.ui.view">
         <field name="name">product.combo.form</field>
-        <field name="model">product.combo</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <form string="Product Combo">
+            <xpath expr="//field[@name='purchase_ok']" position="after">
                 <group>
-
+                    <field name="combo_active"/>
                 </group>
-                <notebook>
-                    <page name="combo_lines_page" string="Combo Lines">
+            </xpath>
+            <xpath expr="//page[@name='inventory']" position="after">
+                <page name="combo" string="Combo">
+                    <group>
 
-                    </page>
-                    <page name="combo_lines_page_2" string="Combo Lines">
-
-                    </page>
-                </notebook>
-            </form>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 
     <record id="view_product_combo_tree" model="ir.ui.view">
-        <field name="name">product.combo.tree</field>
-        <field name="model">product.combo</field>
+        <field name="name">product.combo.view.tree</field>
+        <field name="model">product.template</field>
         <field name="arch" type="xml">
-            <tree string="Product Combos">
+            <tree>
+                <field name="combo_active"/>
             </tree>
+
         </field>
     </record>
-
-    <record id="action_product_combo" model="ir.actions.act_window">
-        <field name="name">Combos</field>
-        <field name="res_model">product.combo</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <menuitem id="menu_product_combo"
-              name="Combos"
-              parent="point_of_sale.pos_config_menu_catalog" sequence="10"
-              action="action_product_combo"/>
 
 </odoo>
