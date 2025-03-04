@@ -4,16 +4,19 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='purchase_ok']" position="after">
-                <group>
-                    <field name="combo_active"/>
-                </group>
+            <xpath expr="//label[@for='purchase_ok']" position="after">
+                <span class="d-inline-block">
+                    <field name="combo_active" on_change="1"/>
+                    <label for="combo_active"/>
+                </span>
             </xpath>
             <xpath expr="//page[@name='inventory']" position="after">
                 <page name="combo" string="Combo">
-                    <group>
-
-                    </group>
+                    <field name="combo_ids">
+                        <tree>
+                            <field name="combo_name"/>
+                        </tree>
+                    </field>
                 </page>
             </xpath>
         </field>
@@ -24,7 +27,7 @@
         <field name="model">product.template</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="combo_active"/>
+
             </tree>
 
         </field>

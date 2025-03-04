@@ -1,2 +1,2 @@
-from . import custom_session, product_combo
-from . import product_combo_line
+from . import custom_session, combo
+from . import product_combo
