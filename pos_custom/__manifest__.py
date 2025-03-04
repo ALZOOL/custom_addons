@@ -10,6 +10,7 @@
         'views/custom_session_views.xml',
         'views/product_combo_views.xml',
         'reports/custom_session_report.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'auto_install': False,

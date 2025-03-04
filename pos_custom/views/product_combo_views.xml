@@ -13,8 +13,11 @@
             <xpath expr="//page[@name='inventory']" position="after">
                 <page name="combo" string="Combo">
                     <field name="combo_ids">
-                        <tree>
+                        <tree editable="bottom">
+                            <field name="required"/>
                             <field name="combo_name"/>
+                            <field name="combo_line_ids" widget="many2many_tags"/>
+                            <field name="max_item"/>
                         </tree>
                     </field>
                 </page>
