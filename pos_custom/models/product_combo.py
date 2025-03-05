@@ -4,7 +4,7 @@ class ProductsCombo(models.Model):
     _name = 'product.combo'
     _description = 'Product Combo'
 
-    combo_name = fields.Char(string='Name')
+    combo_name = fields.Char(string='Name', required='True')
     combo_id = fields.Many2one('product.template',string='Combo ID')
     required = fields.Boolean(string='Required', default=True)
     max_item = fields.Integer(string='Max Items')
