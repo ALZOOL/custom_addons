@@ -19,7 +19,7 @@
                                     <field name="combo_name"/>
                                     <field name="required"/>
                                     <field name="max_item"/>
-                                    <field name="combo_line_ids" mode="tree,form">
+                                    <field name="combo_line_ids" mode="tree,form" editable="bottom">
                                         <tree editable="bottoom">
                                             <field name="combo_line_required"/>
                                             <field name="combo_line_name"/>
